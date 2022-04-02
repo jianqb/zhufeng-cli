@@ -1,0 +1,22 @@
+{
+  "name": "zhufeng-cli",
+  "version": "1.0.0",
+  "main": "index.js",
+  "bin": {
+    "zhufeng-cli": "./bin/zhu",
+    "zhu": "./bin/zhu"
+  },
+  "scripts": {},
+  "keywords": [],
+  "author": "jiangqb",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "chalk": "4.1.2",
+    "commander": "^9.1.0",
+    "download-git-repo": "^3.0.2",
+    "fs-extra": "^10.0.1",
+    "inquirer": "^8.2.2",
+    "ora": "5.4.1"
+  }
+}

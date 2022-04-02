@@ -1,0 +1,57 @@
+#! /usr/bin/env node
+
+// console.log('zhu-cli')
+
+// 1) 配置可执行命令 commander
+const { program } = require("commander")
+const version = require("../package.json").version
+const chalk = require('chalk')
+// 核心功能 1. 创建项目 2. 更改配置文件 3. ui 界面 @vue/cli
+
+// 万一重名了？ 强制创建的模式
+program
+  .command(`create <app-name>`)
+  .description(`create a new project`)
+  .option(`-f, --force`, `overwrite target directory if it exists`)
+  .action((name, cmd) => {
+    // 调用 create 模块去创建
+    require("../lib/create")(name, cmd)
+  })
+
+// vue config --set a 1 => 配置文件
+// vue config --get a
+program
+  .command('config [value]')
+  .description('inspect and modify the config')
+  .option('-g, --get <path>', 'get value from option')
+  .option('-s, --set <path> <value>')
+  .option('-d, --delete <path>', 'delete option from config')
+  .action((value, cmd) => {
+    // 调用 config 模块去实现
+    require("../lib/create")(value, cmd)
+  })
+
+program
+  .command('ui')
+  .description('start and open zhufeng-cli ui')
+  .option('-p, --port <port>', 'Port used for the UI Server')
+  .action(cmd => {
+    require("../lib/create")(null, cmd)
+  })
+
+program
+  .version(`zhufeng-cli@${version}`)
+  .usage(`<command> [option]`)
+
+program.on('--help', () => {
+  console.log();
+  console.log(`Run ${chalk.cyan('zhufeng-cli <command> --help')} show details`);
+  console.log();
+})
+
+// 解析用户执行命令传入的参数
+program.parse(process.argv)
+
+// 2) 我们要实现 脚手架 先做一个命令行交互的功能 inquirer
+// 3) 将模板下载下来 download-git-repo
+// 4) 根据用户的选择动态的生成内容 metalsmith
